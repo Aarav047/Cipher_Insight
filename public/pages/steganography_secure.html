@@ -116,11 +116,25 @@
                             Choose the image from which you want to decode the message.
                         </p>
                         <form class="form">
+                            <!-- File Input -->
                             <div class="form-group">
                                 <input class="form-control" type="file" name="decodeFile" />
                             </div>
+
+                            <div class="form-group row g-3 align-items-center" id="key-column">
+                                <div class="col-auto">
+                                    <label for="keyinput" class="form-label">Enter AES Key:</label>
+                                </div>
+
+                                <!-- Key Input -->
+                                <div class="col-7">
+                                    <input id="keyinput" class="form-control" type="text" placeholder="Enter the Key">
+                                </div>
+                            </div>
+
+                            <!-- Decode Button -->
                             <div class="form-group d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="decode btn btn-primary">
+                                <button type=" button" class="decode btn btn-primary">
                                     Decode
                                 </button>
                             </div>
