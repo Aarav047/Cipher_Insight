@@ -106,20 +106,20 @@ function playfairDecrypt(text, keyword) {
 }
 
 // Event handler for the Playfair Cipher buttons
-document.getElementById("playfairEncryptBtn").addEventListener("click", () => {
-  const text = document.getElementById("playfairText").value.toUpperCase();
+document.querySelector("#playfairEncryptBtn").addEventListener("click", () => {
+  const text = document.querySelector("#playfairText").value.toUpperCase();
   const keyword = document
-    .getElementById("playfairKeyword")
+    .querySelector("#playfairKeyword")
     .value.toUpperCase();
   const encryptedText = playfairEncrypt(text, keyword);
-  document.getElementById("playfairOutput").value = encryptedText;
+  document.querySelector("#playfairOutput").value = encryptedText;
 });
 
-document.getElementById("playfairDecryptBtn").addEventListener("click", () => {
-  const text = document.getElementById("playfairText").value.toUpperCase();
+document.querySelector("#playfairDecryptBtn").addEventListener("click", () => {
+  const text = document.querySelector("#playfairText").value.toUpperCase();
   const keyword = document
-    .getElementById("playfairKeyword")
+    .querySelector("#playfairKeyword")
     .value.toUpperCase();
   const decryptedText = playfairDecrypt(text, keyword);
-  document.getElementById("playfairOutput").value = decryptedText;
+  document.querySelector("#playfairOutput").value = decryptedText;
 });

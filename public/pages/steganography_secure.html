@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Secure Steganography</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik+Iso&family=Tilt+Prism&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="../styles/steganography_secure.css">
+
+    </head>
+
+    <body>
+
+        <!-- Root Container Start -->
+        <div class="container-fluid root">
+            <!-- Header -->
+            <section class="page-header">
+                <h1>Secure Steganography</h1>
+            </section>
+
+            <!-- Nav Elements -->
+            <section class="nav-elements">
+                <nav>
+                    <div class="nav nav-pills" id="pills-tab" role=" tablist">
+                        <button class="nav-link active" id="encode-tab" data-bs-toggle="tab" data-bs-target="#encode"
+                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">Encode</button>
+                        <button class="nav-link" id="decode-tab" data-bs-toggle="tab" data-bs-target="#decode"
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Decode</button>
+                        <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">About</button>
+                    </div>
+                </nav>
+            </section>
+
+            <section class="container tab-content" id="pills-tabContent">
+                <!-- Encoding Tab -->
+                <div class="tab-pane active" id="encode">
+                    <div>
+                        <h2>Encode Message</h2>
+                        <form class="form">
+
+                            <!-- File Input -->
+                            <div class="form-group">
+                                <input class="form-control" id="file-input" type="file" name="baseFile" />
+                            </div>
+
+                            <div class="form-group row g-3 align-items-center" id="key-column">
+                                <div class="col-auto">
+                                    <label for="keyinput" class="form-label">Enter AES Key:</label>
+                                </div>
+
+                                <!-- Key Input -->
+                                <div class="col-8">
+                                    <input id="keyinput" class="form-control" type="text" placeholder="Enter the Key">
+                                </div>
+
+                                <!-- Random Key Generation Function -->
+                                <div class="col-auto">
+                                    <button type="button" class="generatekey btn btn-primary"
+                                        id="key-generate-btn">Generate Random
+                                        Key</button>
+                                </div>
+                            </div>
+
+                            <!-- Plaintext Input -->
+                            <div class="form-group">
+                                <textarea class="form-control message" rows="8"
+                                    placeholder="Enter your message here"></textarea>
+                            </div>
+
+                            <!-- Encoding Button -->
+                            <div class="form-group d-grid gap-2 d-md-flex justify-content-md-end" id="encode-button">
+                                <button type="button" class="encode btn btn-primary">
+                                    Encode
+                                </button>
+                            </div>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="error" style="display: none"></div>
+                    <div class="binary" style="display: none">
+                        <h3>Binary representation of your message</h3>
+                        <textarea class="form-control message" style="word-wrap: break-word">
+                        </textarea>
+                    </div>
+                    <div class="images" style="display: none">
+                        <div class="original" style="display: none">
+                            <h3>Original</h3>
+                            <canvas></canvas>
+                        </div>
+                        <div class="nulled" style="display: none">
+                            <h3>Normalized</h3>
+                            <canvas></canvas>
+                        </div>
+                        <div class="message" style="display: none">
+                            <h3>
+                                Encoded Image
+                            </h3>
+                            <canvas></canvas>
+                        </div>
+                        <button id="downloadButton" class="hiddenDownloadButton">Download Image</button>
+                    </div>
+                </div>
+
+                <!-- Decoding Tab -->
+                <div class="tab-pane" id="decode">
+                    <div>
+                        <h2>Decode Image</h2>
+                        <p class="alert alert-info">
+                            Choose the image from which you want to decode the message.
+                        </p>
+                        <form class="form">
+                            <div class="form-group">
+                                <input class="form-control" type="file" name="decodeFile" />
+                            </div>
+                            <div class="form-group d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="decode btn btn-primary">
+                                    Decode
+                                </button>
+                            </div>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="binary-decode" style="display: none">
+                        <h3>Hidden message</h3>
+                        <textarea class="form-control message" style="word-wrap: break-word">
+                        </textarea>
+                    </div>
+                    <div class="decode" style="display: none">
+                        <h3>Image</h3>
+                        <canvas></canvas>
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div class="tab-pane" id="about">
+                    <div class="text">
+
+                        <h2> Steganography</h2>
+                        <p class="alert alert-info">
+                            Steganography is the practice of concealing a secret message within an ordinary message or
+                            file, without
+                            anyone else being aware that there is a hidden message. The goal of steganography is to hide
+                            the existence
+                            of the message, so that it can be transmitted undetected. Unlike cryptography, which relies
+                            on encryption to
+                            make a message unreadable to anyone who doesn't have the key, steganography does not alter
+                            the message in
+                            any way. Instead, it hides the message within the data of another file, such as an image or
+                            audio file, by
+                            subtly changing certain bits of information. Steganography can be used for a variety of
+                            purposes, from
+                            covert communication to digital watermarking, and has been used throughout history in
+                            various forms.
+                        </p>
+                        <h2> To Encode</h2>
+                        <p class="alert alert-info">
+                            &#x2022; To encode a message into an image, choose the image you want to
+                            use, enter your text and hit the <strong>Encode</strong> button.<br />
+
+                            &#x2022; Keep in mind that the image needs to be larger the more text you wish to conceal.
+                            You will be
+                            alerted if the image you selected is too small to convey your message.<br />
+                            &#x2022; Both the image and the message you conceal won't ever be sent over the internet.
+                        </p>
+
+                        <h2> To Decode</h2>
+                        <p class="alert alert-info">
+                            &#x2022; To decode a hidden message from an image, just choose an image and
+                            hit the <strong>Decode</strong> button.<br />
+                            &#x2022; Both the image and the message you conceal won't ever be sent over the internet.
+                        </p>
+                    </div>
+                </div>
+        </div>
+        <!-- Root Container End -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <script src="../libraries/jquery.min.js"></script>
+        <script src="../scripts/steganography_secure.js"></script>
+    </body>
+
+</html>
