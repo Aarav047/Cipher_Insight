@@ -117,22 +117,38 @@ function convertFromMorse(inputMorse) {
   return textOutput.trim(); // Trim extra spaces at the end
 }
 
+// Function to embed Audio player and play morse code audio
+function playMorseAudio(plaintext) {
+  var m = new jscw({ wpm: 25, text: plaintext });
+  m.renderPlayer("player", m);
+  m.onCharacterPlay = function (c) {
+    console.log(c);
+  };
+}
+
 // Event handler for text to Morse Code conversion
 document.querySelector("#morseEncryptBtn").addEventListener("click", () => {
   const inputText = document
     .querySelector("#morseCodeText")
     .value.toUpperCase();
+  if (isValidMorse(inputText)) {
+    document.querySelector("#morseCodeOutput").value =
+      "You cannot encode morse code!";
+    document.querySelector("#player").innerHTML = "";
 
-  if (!isValidForMorse(inputText)) {
+    return; // Exit encryption process
+  } else if (!isValidForMorse(inputText)) {
     // If input is not valid for Morse code conversion, display an error message
     document.querySelector("#morseCodeOutput").value =
       "Invalid input for Morse code conversion!";
+    document.querySelector("#player").innerHTML = "";
+
     return; // Exit encryption process
   }
 
-  let morseCodeOutput = convertToMorse(inputText);
-
+  const morseCodeOutput = convertToMorse(inputText);
   document.querySelector("#morseCodeOutput").value = morseCodeOutput.trim();
+  playMorseAudio(inputText); // Playing the morse code audio}
 });
 
 // Event handler for Morse Code to text conversion
@@ -145,10 +161,11 @@ document.querySelector("#morseDecryptBtn").addEventListener("click", () => {
     // If input is not a valid Morse code, display an error message
     document.querySelector("#morseCodeOutput").value =
       "Invalid Morse code input!";
+    document.querySelector("#player").innerHTML = "";
     return; // Exit decryption process
   }
 
   let decryptedText = convertFromMorse(inputMorse);
-
   document.querySelector("#morseCodeOutput").value = decryptedText;
+  playMorseAudio(decryptedText);
 });
