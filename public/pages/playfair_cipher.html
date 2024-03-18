@@ -8,111 +8,146 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="../main.css">
+        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
         <link rel="stylesheet" href="../styles/playfair_cipher.css">
 
     </head>
 
     <body>
-        <div id="container-fluid root">
-            <!-- Playfair Cipher -->
-            <div class="container" id="playfair-cipher">
-                <h1>Playfair Cipher</h1>
-                <div class="mb-3">
-                    <label for="playfairText" class="form-label">Enter
-                        Plaintext/Ciphertext:</label>
-                    <textarea class="form-control" id="playfairText" rows="3"
-                        placeholder="Enter the text you want to Encrypt or Decrypt"></textarea>
-                </div>
+        <div class="container-fluid root">
 
-                <div class="mb-3">
-                    <label for="playfairKeyword" class="form-label">Enter the key:</label>
-                    <input type="text" class="form-control" id="playfairKeyword" placeholder="Enter the key">
-                </div>
+            <h1 id="heading-main">Playfair Cipher</h1>
 
-                <button type="button" id="playfairEncryptBtn" class="btn btn-primary btn-sm">Encrypt</button>
-                <button type="button" id="playfairDecryptBtn" class="btn btn-primary btn-sm">Decrypt</button>
-
-                <div class="mb-3">
-                    <label for="playfairOutput" class="form-label">Result:</label>
-                    <textarea class="form-control" id="playfairOutput" rows="3" readonly></textarea>
-                </div>
-            </div>
-
-            <!-- Table -->
-            <section class="container-fluid table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>A</td>
-                            <td>B</td>
-                            <td>C</td>
-                            <td>D</td>
-                            <td>E</td>
-                            <td>F</td>
-                            <td>G</td>
-                            <td>H</td>
-                            <td>I</td>
-                            <td>J</td>
-                            <td>K</td>
-                            <td>L</td>
-                            <td>M</td>
-                            <td>N</td>
-                            <td>O</td>
-                            <td>P</td>
-                            <td>Q</td>
-                            <td>R</td>
-                            <td>S</td>
-                            <td>T</td>
-                            <td>U</td>
-                            <td>V</td>
-                            <td>W</td>
-                            <td>X</td>
-                            <td>Y</td>
-                            <td>Z</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                            <td>10</td>
-                            <td>11</td>
-                            <td>12</td>
-                            <td>13</td>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>17</td>
-                            <td>18</td>
-                            <td>19</td>
-                            <td>20</td>
-                            <td>21</td>
-                            <td>22</td>
-                            <td>23</td>
-                            <td>24</td>
-                            <td>25</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Nav Elements -->
+            <section class="nav-elements ">
+                <nav>
+                    <div class="nav nav-pills justify-content-center" id="pills-tab" role=" tablist">
+                        <button class="nav-link active" id="cipher" data-bs-toggle="tab"
+                            data-bs-target="#playfair-cipher" type="button" role="tab"
+                            aria-selected="true">Cipher</button>
+                        <button class="nav-link justify-content-center" id="description" data-bs-toggle="tab"
+                            data-bs-target="#playfair-disc" type="button" role="tab"
+                            aria-selected="false">Description</button>
+                    </div>
+                </nav>
             </section>
 
-            <!-- Solution -->
-            <section class="solution">
-                <!-- Output will pe added to this section. For reference check caesar cipher javascript code -->
-            </section>
+            <section class="container-fluid tab-content" id="pills-tabContent">
+                <!-- Playfair Cipher -->
+                <div class="tab-pane active" id="playfair-cipher">
+                    <!-- Input -->
+                    <div class="mb-3">
+                        <label for="playfairText" class="form-label">Enter
+                            Plaintext/Ciphertext:</label>
+                        <textarea class="form-control" id="playfairText" rows="5"
+                            placeholder="Enter the text you want to Encrypt or Decrypt"></textarea>
+                    </div>
 
+                    <!-- Key -->
+                    <div class="mb-3">
+                        <label for="playfairKeyword" class="form-label">Enter the key:</label>
+                        <input type="text" class="form-control" id="playfairKeyword" placeholder="For eg. IAMKEY">
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="mb-3">
+                        <button type="button" id="playfairEncryptBtn" class="btn btn-primary btn-sm">Encrypt</button>
+                        <button type="button" id="playfairDecryptBtn" class="btn btn-primary btn-sm">Decrypt</button>
+                    </div>
+
+                    <!-- Output -->
+                    <div class="mb-3">
+                        <label for="playfairOutput" class="form-label">Result:</label>
+                        <textarea class="form-control" id="playfairOutput" rows="5" readonly></textarea>
+                    </div>
+
+
+                    <!-- Table -->
+                    <section class="container-fluid table-responsive hide">
+                        <p><b>Index Table</b></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>A</td>
+                                    <td>B</td>
+                                    <td>C</td>
+                                    <td>D</td>
+                                    <td>E</td>
+                                    <td>F</td>
+                                    <td>G</td>
+                                    <td>H</td>
+                                    <td>I</td>
+                                    <td>J</td>
+                                    <td>K</td>
+                                    <td>L</td>
+                                    <td>M</td>
+                                    <td>N</td>
+                                    <td>O</td>
+                                    <td>P</td>
+                                    <td>Q</td>
+                                    <td>R</td>
+                                    <td>S</td>
+                                    <td>T</td>
+                                    <td>U</td>
+                                    <td>V</td>
+                                    <td>W</td>
+                                    <td>X</td>
+                                    <td>Y</td>
+                                    <td>Z</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                    <td>9</td>
+                                    <td>10</td>
+                                    <td>11</td>
+                                    <td>12</td>
+                                    <td>13</td>
+                                    <td>14</td>
+                                    <td>15</td>
+                                    <td>16</td>
+                                    <td>17</td>
+                                    <td>18</td>
+                                    <td>19</td>
+                                    <td>20</td>
+                                    <td>21</td>
+                                    <td>22</td>
+                                    <td>23</td>
+                                    <td>24</td>
+                                    <td>25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <!-- Solution Section-->
+                    <section class="container-fluid solution hide">
+                        <!-- Output will pe added to this section. -->
+
+                    </section>
+
+                </div>
+
+                <!-- Description Section -->
+                <div class="tab-pane" id="playfair-disc">
+                    <p>s c</p>
+                </div>
+
+            </section>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
         <script src="../scripts/playfair_cipher.js"></script>
     </body>
 
